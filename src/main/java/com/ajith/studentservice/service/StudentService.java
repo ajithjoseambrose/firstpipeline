@@ -42,7 +42,7 @@ public class StudentService {
     }
     public String remove(int id){
         studentRepo.deleteById(id);
-        logger.info("Student deleted with id: {}",id);
+        logger.info("Student deleted with i: {}",id);
         return "Student removed with id "+id;
     }
 
