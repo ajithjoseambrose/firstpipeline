@@ -35,7 +35,7 @@ public class StudentService {
         logger.info("{} ",update);
         return update;
     }
-    public Student add(Student student){
+    public add(Student student){
         Student addStudent = studentRepo.save(student);
         logger.info("{} ",addStudent);
         return addStudent;
