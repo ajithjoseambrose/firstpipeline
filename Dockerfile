@@ -1,5 +1,4 @@
 FROM eclipse-temurin:17-jdk-alpine
-ADD target/student-service-0.0.1-SNAPSHOT.jar student-service-0.0.1-SNAPSHOT.jar
+ADD target/student-service.jar student-service.jar
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/student-service-0.0.1-SNAPSHOT.jar"]
-
+ENTRYPOINT ["java", "-jar", "/student-service.jar"]

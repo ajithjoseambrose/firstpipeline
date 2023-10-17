@@ -7,6 +7,8 @@ spring:
     username: admin
     password: admin1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: STUDENT-SERVICE
 
 #    jpa format
   jpa:
@@ -17,3 +19,14 @@ spring:
       hibernate:
       show_sql: true
       format_sql: true
+
+#    for service registry
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://51.20.108.137:8761/eureka/
+  instance:
+    hostname: localhost
+
