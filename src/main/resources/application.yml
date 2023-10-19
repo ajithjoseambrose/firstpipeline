@@ -21,12 +21,12 @@ spring:
       format_sql: true
 
 #    for service registry
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://51.20.108.137:8761/eureka/
-  instance:
-    hostname: localhost
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://51.20.108.137:8761/eureka/
+#  instance:
+#    hostname: localhost
 

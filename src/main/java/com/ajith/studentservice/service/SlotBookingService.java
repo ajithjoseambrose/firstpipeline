@@ -9,9 +9,6 @@ import com.ajith.studentservice.response.SlotResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +31,7 @@ public class SlotBookingService {
     @Autowired
     private RestTemplate restTemplate;
     public SlotResponse bookSlot(int custId, int bookId){
-        ResponseEntity<Book> book = restTemplate.exchange("http://BOOK-SERVICE/books/" + bookId, HttpMethod.GET,null, Book.class);
+        ResponseEntity<Book> book = restTemplate.exchange("http://booksvc.book-namespace.com:8082/books/" + bookId, HttpMethod.GET,null, Book.class);
             if (book.getStatusCode().is2xxSuccessful()) {
                 Book recievedBook = book.getBody();
                 Student student = studentRepo.findById(custId).get();
@@ -59,7 +56,7 @@ public class SlotBookingService {
                     slotBookingRepo.save(slotBooking);
                     bookObject.setAvailable("false");
                     HttpEntity<Book> requestEntity = new HttpEntity<>(bookObject);
-                    ResponseEntity<Book> responseEntity = restTemplate.exchange("http://BOOK-SERVICE/books/update/" + bookId, HttpMethod.PUT, requestEntity, Book.class);
+                    ResponseEntity<Book> responseEntity = restTemplate.exchange("http://booksvc.book-namespace.com:8082/books/update/" + bookId, HttpMethod.PUT, requestEntity, Book.class);
                     Book bookResponseObject = responseEntity.getBody();
                     logger.info("Book response: {}",bookResponseObject);
 
@@ -86,7 +83,7 @@ public class SlotBookingService {
 
         bookObject.setAvailable("true");
         HttpEntity<Book> requestEntity = new HttpEntity<>(bookObject);
-        ResponseEntity<Book> responseEntity = restTemplate.exchange("http://BOOK-SERVICE/books/update/" + book_id, HttpMethod.PUT, requestEntity, Book.class);
+        ResponseEntity<Book> responseEntity = restTemplate.exchange("http://booksvc.book-namespace.com:8082/books/update/" + book_id, HttpMethod.PUT, requestEntity, Book.class);
         Book bookResponseObject = responseEntity.getBody();
         logger.info("Book response: {} Updated: {}",bookResponseObject,saveReturned);
         return saveReturned;
